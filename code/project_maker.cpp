@@ -44,15 +44,26 @@ DWORD MakeProjectDirectory(char pathString[])
     return error;
 }
 
+DWORD MakeProjectCodeDirectory(char pathString[])
+{
+    char codeDirectory[MAX_PATH] = {'\0'};
+    strcpy(codeDirectory, pathString);
+    strcat(codeDirectory, "\\code");
+    
+    DWORD error = CreateDirectory(codeDirectory, NULL);
+    return error;
+}
+
 void CopyProjectTools(char projectPath[])
 {
     char mainPathOld[] = "..\\tools\\main.cpp";
     char editorProjectPathOld[] = "..\\tools\\project.4coder";
     char buildPathOld[] = "..\\tools\\build.bat";
     
+    MakeProjectCodeDirectory(projectPath);
     char mainPathNew[MAX_PATH] = {'\0'};
     strcpy(mainPathNew, projectPath);
-    strcat(mainPathNew, "\\main.cpp");
+    strcat(mainPathNew, "\\code\\main.cpp");
     
     char editorProjectPathNew[MAX_PATH] = {'\0'};
     strcpy(editorProjectPathNew, projectPath);
@@ -63,11 +74,8 @@ void CopyProjectTools(char projectPath[])
     strcat(buildPathNew, "\\build.bat");
     
     CopyFileA(mainPathOld, mainPathNew, TRUE);
-    DWORD dw = GetLastError();
     CopyFileA(editorProjectPathOld, editorProjectPathNew, TRUE);
-    dw = GetLastError();
     CopyFileA(buildPathOld, buildPathNew, TRUE);
-    dw = GetLastError();
 }
 void MoveToolsToProjectPath()
 {

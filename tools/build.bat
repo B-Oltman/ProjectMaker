@@ -6,6 +6,6 @@ set CommonLinkerFlags= -incremental:no -opt:ref
 IF NOT EXIST .\build mkdir .\build
 pushd .\build
 
-cl %CommonCompilerFlags% ..\main.cpp /link  %CommonLinkerFlags%
+cl %CommonCompilerFlags% ..\code\main.cpp /link  %CommonLinkerFlags%
 
 popd
