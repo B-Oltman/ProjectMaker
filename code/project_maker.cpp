@@ -84,18 +84,18 @@ void CopyProjectTools(char projectPath[])
 
 int main(int argc, char *argv[])
 {
-    DWORD error = 1;
+    DWORD noError = 1;
     char pathName[MAX_PATH];
     do
     {
         MakePath(pathName);
-        error = MakeProjectDirectory(pathName);
-        if(error == 0)
+        noError = MakeProjectDirectory(pathName);
+        if(!noError)
         {
-            printf("There was a problem creating the project. Either the directory\n\
-                   contains an existing project, or the chosen drive does not exist. Try again...\n\n");
+            printf("There was a problem creating the project. Either the directory\n");
+            printf("contains an existing project, or the chosen drive does not exist. Try again...\n\n");
         }
-    }while(error == 0);
+    }while(!noError);
     CopyProjectTools(pathName);
     
     return 0;
