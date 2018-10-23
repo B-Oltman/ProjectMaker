@@ -54,32 +54,32 @@ DWORD MakeProjectCodeDirectory(char pathString[])
     return error;
 }
 
+void ExtendPath(char oldPath[], char newPath[], char pathExtension[])
+{
+    strcpy(newPath, oldPath);
+    strcat(newPath, pathExtension);
+}
+
 void CopyProjectTools(char projectPath[])
 {
     char mainPathOld[] = "..\\tools\\main.cpp";
     char editorProjectPathOld[] = "..\\tools\\project.4coder";
     char buildPathOld[] = "..\\tools\\build.bat";
     
+    
     MakeProjectCodeDirectory(projectPath);
-    char mainPathNew[MAX_PATH] = {'\0'};
-    strcpy(mainPathNew, projectPath);
-    strcat(mainPathNew, "\\code\\main.cpp");
+    char mainPathNew[MAX_PATH];
+    ExtendPath(projectPath, mainPathNew, "\\code\\main.cpp");
     
-    char editorProjectPathNew[MAX_PATH] = {'\0'};
-    strcpy(editorProjectPathNew, projectPath);
-    strcat(editorProjectPathNew, "\\project.4coder");
+    char editorProjectPathNew[MAX_PATH];
+    ExtendPath(projectPath, editorProjectPathNew, "\\project.4coder");
     
-    char buildPathNew[MAX_PATH] = {'\0'};
-    strcpy(buildPathNew, projectPath);
-    strcat(buildPathNew, "\\build.bat");
+    char buildPathNew[MAX_PATH];
+    ExtendPath(projectPath, buildPathNew,"\\build.bat");
     
     CopyFileA(mainPathOld, mainPathNew, TRUE);
     CopyFileA(editorProjectPathOld, editorProjectPathNew, TRUE);
     CopyFileA(buildPathOld, buildPathNew, TRUE);
-}
-void MoveToolsToProjectPath()
-{
-    
 }
 
 int main(int argc, char *argv[])
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
         if(error == 0)
         {
             printf("There was a problem creating the project. Either the directory\n\
-contains an existing project, or the chosen drive does not exist. Try again...\n\n");
+                   contains an existing project, or the chosen drive does not exist. Try again...\n\n");
         }
     }while(error == 0);
     CopyProjectTools(pathName);
