@@ -92,7 +92,8 @@ int main(int argc, char *argv[])
         error = MakeProjectDirectory(pathName);
         if(error == 0)
         {
-            printf("Project already exists in chosen directory, choose a different name\n");
+            printf("There was a problem creating the project. Either the directory\n\
+contains an existing project, or the chosen drive does not exist. Try again...\n\n");
         }
     }while(error == 0);
     CopyProjectTools(pathName);
