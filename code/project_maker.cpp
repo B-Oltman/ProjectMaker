@@ -27,14 +27,14 @@ void GetProjectName(char projectName[])
     fgets(projectName, 100, stdin);
 }
 
-void MakePath(char PathString[])
+void MakePath(char pathString[])
 {
     char driveLetter = GetDriveLetter();
     char projectName[100] = {'\0'};
     GetProjectName(projectName);
     projectName[strlen(projectName) - 1] = '\0';
     
-    sprintf_s(PathString, MAX_PATH,"%c:\\%s",driveLetter, projectName);
+    sprintf_s(pathString, MAX_PATH,"%c:\\%s",driveLetter, projectName);
 }
 
 DWORD MakeProjectDirectory(char pathString[])
