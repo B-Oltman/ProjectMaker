@@ -15,8 +15,8 @@ char GetDriveLetter()
         fgets(drive, 3, stdin);
         drive[1] = '\0';
         
-    }while((drive[0] < 'A' || drive[0] > 'Z') ||
-           (drive[0] < 'a' || drive[0] > 'z'));
+    }while((drive[0] > 'Z' && drive[0] <'a')
+           || drive[0] < 'A' || drive[0] > 'z');
     
     return drive[0];
 }
