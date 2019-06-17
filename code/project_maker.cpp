@@ -65,6 +65,7 @@ void CopyProjectTools(char projectPath[])
     char mainPathOld[] = "..\\tools\\main.cpp";
     char editorProjectPathOld[] = "..\\tools\\project.4coder";
     char buildPathOld[] = "..\\tools\\build.bat";
+	char executePathOld[] = "..\\tools\\main.bat";
     
     
     MakeProjectCodeDirectory(projectPath);
@@ -76,10 +77,14 @@ void CopyProjectTools(char projectPath[])
     
     char buildPathNew[MAX_PATH];
     ExtendPath(projectPath, buildPathNew,"\\build.bat");
+	
+	char executePathNew[MAX_PATH];
+	ExtendPath(projectPath, executePathNew,"\\main.bat");
     
     CopyFileA(mainPathOld, mainPathNew, TRUE);
     CopyFileA(editorProjectPathOld, editorProjectPathNew, TRUE);
     CopyFileA(buildPathOld, buildPathNew, TRUE);
+	CopyFileA(executePathOld, executePathNew, TRUE);
 }
 
 int main(int argc, char *argv[])
